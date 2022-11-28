@@ -10,9 +10,7 @@ const Header = () => {
   );
 };
 
-const ListAddBox = (props) => {
-  const { todos, setTodo } = props;
-
+const ListAddBox = ({ todos, setTodo }) => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
 
@@ -40,49 +38,48 @@ const ListAddBox = (props) => {
       //초기화
       setTitle("");
       setDesc("");
-
-      return false;
+    } else {
+      alert("제목과 내용을 모두 입력해주세요");
     }
-    return false;
   };
   return (
     <div className="listAddBoxWrap">
       <div className="listAddBoxTitle">
         M<span>y</span> Todo List
       </div>
-      <form action="#" onSubmit={listAdd}>
-        <div className="listAddBox">
-          <div className="listAddBoxInput">
-            <div className="titleBox">
-              <label htmlFor="title">제목</label>
-              <input
-                type="text"
-                id="title"
-                onChange={titleWriting}
-                value={title}
-                required
-              />
-            </div>
-            <div className="titleBox">
-              <label htmlFor="desc">내용</label>
-              <textarea
-                id="desc"
-                rows="2"
-                onChange={descWriting}
-                value={desc}
-                required
-              ></textarea>
-            </div>
+      <div className="listAddBox">
+        <div className="listAddBoxInput">
+          <div className="titleBox">
+            <label htmlFor="title">제목</label>
+            <input
+              type="text"
+              id="title"
+              onChange={titleWriting}
+              value={title}
+            />
           </div>
-          <input className="formBtn" type="submit" value="추가하기" />
+          <div className="titleBox">
+            <label htmlFor="desc">내용</label>
+            <textarea
+              id="desc"
+              rows="2"
+              onChange={descWriting}
+              value={desc}
+            ></textarea>
+          </div>
         </div>
-      </form>
+        <input
+          className="formBtn"
+          onClick={listAdd}
+          type="submit"
+          value="추가하기"
+        />
+      </div>
     </div>
   );
 };
-const ListBox = (props) => {
-  const { listTitle, todos, setTodo } = props;
 
+const TodoList = ({ todos, setTodo, todo }) => {
   //삭제하기
   const listDelete = (num) => {
     let todoRetouched = [...todos];
@@ -98,7 +95,6 @@ const ListBox = (props) => {
     );
     setTodo(newToodo);
   };
-
   //취소하기
   const todoCancel = (num) => {
     const newToodo = todos.map((todo) =>
@@ -107,57 +103,53 @@ const ListBox = (props) => {
     setTodo(newToodo);
   };
   return (
+    <li key={todos.indexOf(todo)} className="todoList">
+      <div className="todoListTitle">{todo.title}</div>
+      <div className="todoListDesc">{todo.desc}</div>
+      <div className="btnWrap">
+        <button
+          onClick={() => {
+            listDelete(todo.id);
+          }}
+          className="listDeleteBtn"
+        >
+          삭제하기
+        </button>
+        {!todo.isDone ? (
+          <button
+            onClick={() => {
+              completed(todo.id);
+            }}
+          >
+            완료하기
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              todoCancel(todo.id);
+            }}
+          >
+            취소하기
+          </button>
+        )}
+      </div>
+    </li>
+  );
+};
+
+const ListBox = ({ listTitle, todos, setTodo }) => {
+  return (
     <div className="sublistWrap">
       <div className="usblistTitle">{listTitle}</div>
       <ul className="todoLists">
         {todos.map((todo) => {
           if (listTitle === "Working") {
             return !todo.isDone ? (
-              <li key={todos.indexOf(todo)} className="todoList">
-                <div className="todoListTitle">{todo.title}</div>
-                <div className="todoListDesc">{todo.desc}</div>
-                <div className="btnWrap">
-                  <button
-                    onClick={() => {
-                      listDelete(todo.id);
-                    }}
-                    className="listDeleteBtn"
-                  >
-                    삭제하기
-                  </button>
-                  <button
-                    onClick={() => {
-                      completed(todo.id);
-                    }}
-                  >
-                    완료하기
-                  </button>
-                </div>
-              </li>
+              <TodoList todos={todos} setTodo={setTodo} todo={todo} />
             ) : null;
-          } else if (listTitle === "Done") {
+          } else {
             return todo.isDone ? (
-              <li key={todos.indexOf(todo)} className="todoList">
-                <div className="todoListTitle">{todo.title}</div>
-                <div className="todoListDesc">{todo.desc}</div>
-                <div className="btnWrap">
-                  <button
-                    onClick={() => {
-                      listDelete(todo.id);
-                    }}
-                    className="listDeleteBtn"
-                  >
-                    삭제하기
-                  </button>
-                  <button
-                    onClick={() => {
-                      todoCancel(todo.id);
-                    }}
-                  >
-                    취소하기
-                  </button>
-                </div>
-              </li>
+              <TodoList todos={todos} setTodo={setTodo} todo={todo} />
             ) : null;
           }
         })}
