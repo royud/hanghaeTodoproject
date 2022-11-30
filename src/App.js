@@ -27,7 +27,7 @@ const ListAddBox = ({ todos, setTodo }) => {
   const listAdd = () => {
     if ((title !== "", desc !== "")) {
       const newList = {
-        id: Math.floor(Math.random() * 100),
+        id: todos[todos.length - 1].id + 1,
         title: title,
         desc: desc,
         isDone: false,
@@ -145,11 +145,21 @@ const ListBox = ({ listTitle, todos, setTodo }) => {
         {todos.map((todo) => {
           if (listTitle === "Working") {
             return !todo.isDone ? (
-              <TodoList todos={todos} setTodo={setTodo} todo={todo} />
+              <TodoList
+                key={todo.id}
+                todos={todos}
+                setTodo={setTodo}
+                todo={todo}
+              />
             ) : null;
           } else {
             return todo.isDone ? (
-              <TodoList todos={todos} setTodo={setTodo} todo={todo} />
+              <TodoList
+                key={todo.id}
+                todos={todos}
+                setTodo={setTodo}
+                todo={todo}
+              />
             ) : null;
           }
         })}
