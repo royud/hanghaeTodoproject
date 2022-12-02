@@ -2,6 +2,8 @@
   padding: 0;
   margin: 0;
   list-style: none;
+  text-decoration: none;
+  color: inherit;
 }
 body::-webkit-scrollbar {
   width: 10px;
@@ -24,11 +26,6 @@ header {
 }
 header div {
   margin: 0 50px;
-}
-.wrap {
-  max-width: 1200px;
-  min-width: 800px;
-  margin: 0 auto;
 }
 .listAddBoxWrap {
   margin-bottom: 50px;
@@ -125,12 +122,12 @@ header div {
   gap: 10px;
 }
 .todoList {
-  width: 180px;
-  height: 150px;
+  width: 220px;
+  height: 200px;
   background-color: rgb(86, 48, 121);
   border-radius: 10px;
   color: white;
-  padding: 40px;
+  padding: 20px;
 }
 .todoListTitle {
   font-size: 25px;
@@ -139,7 +136,7 @@ header div {
 }
 .todoListDesc {
   font-size: 15px;
-  height: 60px;
+  height: 80px;
 }
 .btnWrap {
   width: 100%;
