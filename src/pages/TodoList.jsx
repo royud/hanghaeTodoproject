@@ -44,6 +44,7 @@ const Wrap = styled.div`
     border-radius: 5px;
     background-color: rgb(86, 48, 121);
     color: white;
+    cursor: pointer;
   }
 `;
 const Padding = styled.div`
