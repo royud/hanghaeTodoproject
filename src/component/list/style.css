@@ -1,0 +1,16 @@
+.sublistWrap {
+  width: 45%;
+}
+.usblistTitle {
+  color: rgb(86, 48, 121);
+  font-size: 40px;
+  font-weight: bold;
+  margin-left: 20px;
+}
+.todoLists {
+  width: 100%;
+  display: flex;
+  padding: 10px;
+  flex-wrap: wrap;
+  gap: 10px;
+}

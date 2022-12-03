@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 
 import Todo from "../todo/Todo";
 
+import "./style.css";
+
 const List = ({ listTitle }) => {
   const todoLists = useSelector((state) => state.todos.lists);
 

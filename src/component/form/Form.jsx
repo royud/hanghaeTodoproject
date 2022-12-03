@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listAdd } from "../../redux/modules/todos";
 
+import "./style.css";
+
 const Form = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -42,35 +44,35 @@ const Form = () => {
       <div className="listAddBoxTitle">
         M<span>y</span> Todo List
       </div>
-      <div className="listAddBox">
-        <div className="listAddBoxInput">
-          <div className="titleBox">
-            <label htmlFor="title">제목</label>
-            <input
-              type="text"
-              id="title"
-              onChange={titleWriting}
-              value={title}
-            />
+      <form onSubmit={listAdded}>
+        <div className="listAddBox">
+          <div className="listAddBoxInput">
+            <div className="titleBox">
+              <label htmlFor="title">제목</label>
+              <input
+                type="text"
+                id="title"
+                onChange={titleWriting}
+                value={title}
+                required
+              />
+            </div>
+            <div className="titleBox">
+              <label htmlFor="desc">내용</label>
+              <textarea
+                id="desc"
+                rows="2"
+                onChange={descWriting}
+                value={desc}
+                required
+              ></textarea>
+            </div>
           </div>
-          <div className="titleBox">
-            <label htmlFor="desc">내용</label>
-            <textarea
-              id="desc"
-              rows="2"
-              onChange={descWriting}
-              value={desc}
-            ></textarea>
-          </div>
+          <input className="formBtn" type="submit" value="추가하기" />
         </div>
-        <input
-          className="formBtn"
-          onClick={listAdded}
-          type="submit"
-          value="추가하기"
-        />
-      </div>
+      </form>
     </div>
   );
 };
+
 export default Form;

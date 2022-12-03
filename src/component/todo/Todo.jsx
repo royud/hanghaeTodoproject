@@ -3,6 +3,8 @@ import { removeList, updateList } from "../../redux/modules/todos";
 
 import { Link } from "react-router-dom";
 
+import "./style.css";
+
 import styled from "styled-components";
 
 const Todo = ({ todo }) => {

@@ -2,17 +2,30 @@
 import Form from "../component/form/Form";
 import List from "../component/list/List";
 
+import styled from "styled-components";
+
 const Index = () => {
   return (
     <div>
       <Form />
-      <div className="list_wrap">
+      <ListWrap>
         <List listTitle="Working" />
-        <div className="listHr"></div>
+        <ListHr />
         <List listTitle="Done" />
-      </div>
+      </ListWrap>
     </div>
   );
 };
 
+const ListWrap = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+`;
+const ListHr = styled.div`
+  width: 4px;
+  background-color: rgb(86, 48, 121);
+  border-radius: 10px;
+`;
 export default Index;
